@@ -37,14 +37,17 @@ namespace Grocery.App.ViewModels
         {
             //Maak de lijst AvailableProducts leeg
             AvailableProducts.Clear();
+
             //Haal de lijst met producten op
             var products = new ProductRepository().GetAll();
-
+            
             foreach (var item in products)
             {
-                AvailableProducts.Add(item);
+                if (item.Stock != 0 && !MyGroceryListItems.Any(groList => groList.ProductId == item.Id))
+                {
+                    AvailableProducts.Add(item);
+                }
             }
-            //Houdt rekening met de voorraad (als die nul is kun je het niet meer aanbieden).            
         }
 
         partial void OnGroceryListChanged(GroceryList value)
