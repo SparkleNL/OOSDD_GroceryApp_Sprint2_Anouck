@@ -3,6 +3,28 @@
 ## Docentversie  
 In deze versie zijn de wijzigingen doorgevoerd en is de code compleet.  
 
+## GitFlow
+De branches die altijd aanwezig zijn, en dus niet worden verwijderd zijn: main & develop. 
+
+### Feature
+Voor het maken van een nieuwe functionaliteit (use case) maak je gebruik van een feature branch deze maak je aan vanuit de develop branch. 
+- Feature branch naamgeving: feature/[use case]
+
+Na het afronden van een use case in de feature branch, wordt een pull request gedaan naar de develop branch. Hierna wordt de feature branch verwijderd.
+Na het afronden van alle use cases voor de minor version merge je de develop branch naar de release branch. 
+
+### Hotfix
+Voor hotfixes wordt gebruikgemaakt van een hotfix branch, deze wordt aangemaakt via de main branch. 
+- Hotfix branch naamgeving: hotfix/[use case]-[wat verkeerd is]
+Bij de hotfix kan wat verkeerd is van alles zijn, zoals een typo of kleur. Probeer zo kort mogelijk op te schrijven wat opgelost wordt met de hotfix.
+
+Merge de hotfix naar de main branch en naar de develop branch. Maak vanuit de main branch een release aan met een correct releasenummer
+
+### Release branch
+Wanneer de use cases zijn gemerged van de develop branch naar de release branch wordt getest of er bugs in de code zitten. 
+Wanneer dit het geval is zorg je ervoor dat deze gefixt worden in de release branch. Als alles goed werkt zonder bugs merge je naar de main en naar de develop branch
+zodat allebei de branches up to date zijn.
+
 ## Studentversie:  
 ### UC04 Kiezen kleur boodschappenlijst  
 Is compleet.
@@ -17,7 +39,7 @@ Is compleet.
 ### UC06 Inloggen  
 Een collega is ziek maar heeft al een deel van de inlogfunctionaliteit gemaakt.  
 Dit betreft het Loginscherm (LoginView) met bijbehorend ViewModel (LoginViewModel),  
-maar ook al een deel van de authenticatieService (AuthService in Grocery.Core),  
+maar ook al een deel van de authenticatieService (AuthServnn,mnmice in Grocery.Core),  
 de clientrepository (ClientRepository in Grocery.Core.Data)  
 en de client class (Client in Grocery.Core).  
 De opdracht is om zelfstandig de login functionaliteit te laten werken.  
@@ -31,4 +53,4 @@ De opdracht is om zelfstandig de login functionaliteit te laten werken.
 6. In App.xaml.cs staat /*LoginViewModel viewModel*/ haal hier /* en */ weg, zodat het LoginViewModel beschikbaar komt.  
 7. In App.xaml.cs staat //MainPage = new LoginView(viewModel); Haal hier de // weg en zet de regel erboven in commentaar, zodat AppShell wordt uitgeschakeld.  
 8. Uncomment de route naar het Login scherm in AppShell.xaml.cs: //Routing.RegisterRoute("Login", typeof(LoginView)); 
-
+ 
