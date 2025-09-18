@@ -39,8 +39,8 @@ namespace Grocery.App.ViewModels
             AvailableProducts.Clear();
 
             //Haal de lijst met producten op
-            var products = new ProductRepository().GetAll();
-            
+            var products = _productService.GetAll();
+
             foreach (var item in products)
             {
                 if (item.Stock != 0 && !MyGroceryListItems.Any(groList => groList.ProductId == item.Id))
@@ -73,6 +73,10 @@ namespace Grocery.App.ViewModels
                     productId: product.Id,
                     amount: 1
                     );
+
+                product.Stock -= 1;
+                _productService.Update(product);
+
                 _groceryListItemsService.Add(groceryListItem);
 
                 AvailableProducts.Remove(product);
