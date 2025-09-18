@@ -61,15 +61,24 @@ namespace Grocery.App.ViewModels
             Dictionary<string, object> paramater = new() { { nameof(GroceryList), GroceryList } };
             await Shell.Current.GoToAsync($"{nameof(ChangeColorView)}?Name={GroceryList.Name}", true, paramater);
         }
+
         [RelayCommand]
         public void AddProduct(Product product)
         {
-            //Controleer of het product bestaat en dat de Id > 0
-            //Maak een GroceryListItem met Id 0 en vul de juiste productid en grocerylistid
-            //Voeg het GroceryListItem toe aan de dataset middels de _groceryListItemsService
-            //Werk de voorraad (Stock) van het product bij en zorg dat deze wordt vastgelegd (middels _productService)
-            //Werk de lijst AvailableProducts bij, want dit product is niet meer beschikbaar
-            //call OnGroceryListChanged(GroceryList);
+            if (product != null && product.Id > 0)
+            {
+                var groceryListItem = new GroceryListItem(
+                    id: 0,
+                    groceryListId: GroceryList.Id,
+                    productId: product.Id,
+                    amount: 1
+                    );
+                _groceryListItemsService.Add(groceryListItem);
+
+                AvailableProducts.Remove(product);
+
+                OnGroceryListChanged(GroceryList);
+            }
         }
     }
 }
