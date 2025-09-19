@@ -4,7 +4,6 @@ using Grocery.App.Views;
 using Grocery.Core.Interfaces.Services;
 using Grocery.Core.Models;
 using System.Collections.ObjectModel;
-using Grocery.Core.Data.Repositories;
 
 namespace Grocery.App.ViewModels
 {
